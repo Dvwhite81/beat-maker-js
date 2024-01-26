@@ -1,73 +1,213 @@
 /*@import './header.css';*/
 
 @font-face {
-    font-family: 'roboto';
-    src: url('../assets/fonts/Roboto-Thin.ttf');
-    font-weight: 200;
-    font-display: swap;
+  font-family: 'roboto';
+  src: url('../assets/fonts/Roboto-Thin.ttf');
+  font-weight: 200;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: 'roboto';
-    src: url('../assets/fonts/Roboto-Regular.ttf');
-    font-weight: 400;
-    font-display: swap;
+  font-family: 'roboto';
+  src: url('../assets/fonts/Roboto-Regular.ttf');
+  font-weight: 400;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: 'roboto';
-    src: url('../assets/fonts/Roboto-Medium.ttf');
-    font-weight: 700;
-    font-display: swap;
+  font-family: 'roboto';
+  src: url('../assets/fonts/Roboto-Medium.ttf');
+  font-weight: 700;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: 'roboto';
-    src: url('../assets/fonts/Roboto-Bold.ttf');
-    font-weight: 900;
-    font-display: swap;
+  font-family: 'roboto';
+  src: url('../assets/fonts/Roboto-Bold.ttf');
+  font-weight: 900;
+  font-display: swap;
 }
 
 * {
-    font-family: roboto, sans-serif;
-    font-weight: 400;
-    margin: 0;
-    padding: 0;
+  font-family: roboto, sans-serif;
+  font-weight: 400;
+  margin: 0;
+  padding: 0;
 }
 
-:root {
-  --sidebar-width: 20vw;
-  --board-height: 75vh;
-  --board-width: 60vw;
-  --card-height: calc((var(--board-height) * 0.8) / 3);
-  --card-width: calc((var(--board-width) * 0.8) / 8);
-  --blue-bg: #065094;
-  --red-bg: #d2202f;
-  --light-blue-bg: skyblue;
-}
-
-.hide {
-  display: none !important;
-}
-
-.two-columns {
-  grid-template-columns: 2fr 3fr !important;
-}
-
-.double-width {
-  width: calc(var(--sidebar-width) * 2) !important;
-}
-
-/* Main container */
-#container {
-  background-color: var(--light-blue-bg);
-  display: grid;
-  grid-template-rows: 15vh 85vh;
-  height: 100vh;
+body {
   width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #616161; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #9bc5c3,
+    #616161
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #9bc5c3,
+    #616161
+  ) !important; /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
-#game-container {
-  display: grid;
-  grid-template-columns: 1fr 4fr 1fr;
+#container {
+  width: 80%;
+  min-width: 800px;
+  height: 70%;
+  min-height: 400px;
+  display: flex;
+  position: relative;
+}
+
+#container .drum-btns {
+  width: 20%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+#container .drum-btns .audio {
+  width: 120px;
+  height: 60px;
+  background-color: #eee;
+  border-radius: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#container .drum-btns .audio:hover {
+  cursor: pointer;
+}
+#container .drum-board {
+  width: 80%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+#container .drum-board .title {
+  width: 100%;
+  position: absolute;
+  top: -80px;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#container .drum-board .title h3 {
+  display: block;
+  padding: 10px 40px;
+  color: #fff;
+  background-color: #f78259;
+}
+#container .drum-board .play-btn {
+  width: 100%;
+  position: absolute;
+  bottom: -80px;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#container .drum-board .play-btn .btn {
+  display: block;
+  width: 60px;
+  height: 60px;
+  background-color: #f78259;
+  border-radius: 50%;
+  position: relative;
+}
+#container .drum-board .play-btn .btn:hover {
+  cursor: pointer;
+}
+#container .drum-board .play-btn .play {
+  display: block;
+}
+#container .drum-board .play-btn .play:before {
+  content: '';
+  width: 0;
+  height: 0;
+  position: absolute;
+  top: 15px;
+  left: 22px;
+  border-top: 15px solid transparent;
+  border-left: 20px solid #fff;
+  border-bottom: 15px solid transparent;
+}
+#container .drum-board .play-btn .stop {
+  display: none;
+}
+#container .drum-board .play-btn .stop:before {
+  content: '';
+  width: 24px;
+  height: 24px;
+  background-color: #fff;
+  position: absolute;
+  top: 18px;
+  left: 18px;
+}
+#container .drum-board .play-btn .not-active {
+  opacity: 0.5;
+}
+#container .drum-board .play-btn .not-active:hover {
+  cursor: default;
+}
+#container .drum-board .column {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+#container .drum-board .column .square {
+  width: 55px;
+  height: 55px;
+  transition: all 0.2s;
+}
+#container .drum-board .column .square:hover {
+  cursor: pointer;
+}
+#container .drum-board .column .active-btn {
+  transform: scale(1.2);
+}
+#container .drum-board .column .drum-tom {
+  background-color: #00b7d4;
+  opacity: 0.3;
+}
+#container .drum-board .column .drum-clap {
+  background-color: #ff80ff;
+  opacity: 0.3;
+}
+#container .drum-board .column .drum-kick {
+  background-color: #cde800;
+  opacity: 0.3;
+}
+#container .drum-board .column .drum-closedhat {
+  background-color: #ff6961;
+  opacity: 0.3;
+}
+#container .drum-board .column .drum-openhat {
+  background-color: #7659f7;
+  opacity: 0.3;
+}
+#container .drum-board .column .drum-boom {
+  background-color: #ff962e;
+  opacity: 0.3;
+}
+#container .drum-board .column .drum-ride {
+  background-color: #20e381;
+  opacity: 0.3;
+}
+#container .drum-board .column .drum-snare {
+  background-color: #1d56b8;
+  opacity: 0.3;
+}
+#container .drum-board .column .play {
+  opacity: 1;
 }
