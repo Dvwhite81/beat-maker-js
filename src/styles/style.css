@@ -55,83 +55,106 @@ body {
 }
 
 #container {
-  width: 80%;
-  min-width: 800px;
-  height: 70%;
-  min-height: 400px;
   display: flex;
+  flex-direction: column;
+  height: 100vh;
   position: relative;
+  width: 100vw;
 }
 
-#container .drum-btns {
-  width: 20%;
-  height: 100%;
+#setup-container {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-around;
-}
-#container .drum-btns .audio {
-  width: 120px;
-  height: 60px;
-  background-color: #eee;
-  border-radius: 30px;
-  display: flex;
-  align-items: center;
   justify-content: center;
 }
-#container .drum-btns .audio:hover {
-  cursor: pointer;
-}
-#container .drum-board {
-  width: 80%;
-  height: 100%;
+
+.setup-input-div {
+  align-items: center;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: space-around;
+  justify-content: center;
+  text-align: center;
 }
-#container .drum-board .title {
+
+#all-instrument-sections {
+  height: 80%;
+  margin: auto;
+}
+
+.instrument {
+  display: grid;
+}
+
+.instrument-section,
+.info-section {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  height: 100%;
   width: 100%;
-  position: absolute;
-  top: -80px;
-  left: 0;
-  right: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
-#container .drum-board .title h3 {
-  display: block;
-  padding: 10px 40px;
+
+.instrument-button-section,
+.info-btn {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.instrument-button-section .audio {
+  align-items: center;
+  background-color: #f78259;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.board {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.board-title {
+  display: flex;
+  position: relative;
+  text-align: center;
+}
+
+.board-title h3 {
   color: #fff;
   background-color: #f78259;
+  width: 100%;
 }
-#container .drum-board .play-btn {
+
+.board .play-btn {
   width: 100%;
   position: absolute;
-  bottom: -80px;
+  bottom: 0;
   left: 0;
   right: 0;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-#container .drum-board .play-btn .btn {
-  display: block;
-  width: 60px;
-  height: 60px;
+
+.board .play-btn .btn {
   background-color: #f78259;
   border-radius: 50%;
-  position: relative;
-}
-#container .drum-board .play-btn .btn:hover {
   cursor: pointer;
+  display: block;
+  height: 60px;
+  position: relative;
+  width: 60px;
 }
-#container .drum-board .play-btn .play {
+
+.board .play-btn .play {
   display: block;
 }
-#container .drum-board .play-btn .play:before {
+
+.board .play-btn .play:before {
   content: '';
   width: 0;
   height: 0;
@@ -142,10 +165,12 @@ body {
   border-left: 20px solid #fff;
   border-bottom: 15px solid transparent;
 }
-#container .drum-board .play-btn .stop {
+
+.board .play-btn .stop {
   display: none;
 }
-#container .drum-board .play-btn .stop:before {
+
+.board .play-btn .stop:before {
   content: '';
   width: 24px;
   height: 24px;
@@ -154,60 +179,126 @@ body {
   top: 18px;
   left: 18px;
 }
-#container .drum-board .play-btn .not-active {
+
+.board .play-btn .not-active {
   opacity: 0.5;
 }
-#container .drum-board .play-btn .not-active:hover {
+
+.board .play-btn .not-active:hover {
   cursor: default;
 }
-#container .drum-board .column {
+
+.row,
+.info-measure {
   width: 100%;
-  display: flex;
+  height: 100%;
   justify-content: space-around;
+    display: flex;
 }
-#container .drum-board .column .square {
-  width: 55px;
-  height: 55px;
-  transition: all 0.2s;
-}
-#container .drum-board .column .square:hover {
+
+.board .row .square {
+  border: 1px solid;
   cursor: pointer;
+  height: 100%;
+  transition: all 0.2s;
+  width: 100%;
 }
-#container .drum-board .column .active-btn {
+
+.board .row .active-btn {
   transform: scale(1.2);
 }
-#container .drum-board .column .drum-tom {
+
+.board .row .drums-tom-1,
+.board .row .drums-tom-2 {
   background-color: #00b7d4;
   opacity: 0.3;
 }
-#container .drum-board .column .drum-clap {
+
+.board .row .drums-clap-1,
+.board .row .drums-clap-2 {
   background-color: #ff80ff;
   opacity: 0.3;
 }
-#container .drum-board .column .drum-kick {
+
+.board .row .drums-kick-1,
+ .board .row .drums-kick-2 {
   background-color: #cde800;
   opacity: 0.3;
 }
-#container .drum-board .column .drum-closedhat {
+
+.board .row .drums-closed-hihat-1,
+.board .row .drums-closed-hihat-2 {
   background-color: #ff6961;
   opacity: 0.3;
 }
-#container .drum-board .column .drum-openhat {
+
+.board .row .drums-open-hihat-1,
+.board .row .drums-open-hihat-2 {
   background-color: #7659f7;
   opacity: 0.3;
 }
-#container .drum-board .column .drum-boom {
+
+.board .row .drums-boom-1,
+.board .row .drums-boom-2 {
   background-color: #ff962e;
   opacity: 0.3;
 }
-#container .drum-board .column .drum-ride {
+.board .row .drums-ride-1,
+.board .row .drums-ride-2 {
   background-color: #20e381;
   opacity: 0.3;
 }
-#container .drum-board .column .drum-snare {
+
+.board .row .drums-snare-1,
+ .board .row .drums-snare-2 {
   background-color: #1d56b8;
   opacity: 0.3;
 }
-#container .drum-board .column .play {
+
+.board .row .play {
   opacity: 1;
+}
+
+.info-measure {
+  border: 1px solid;
+}
+
+.info-beat {
+  align-items: flex-end;
+  display: flex;
+}
+
+.board-title-icon-div {
+  cursor: pointer;
+  height: 100%;
+  position: absolute;
+  right: 0;
+}
+
+.selected {
+  height: 80%;
+  left: 50%;
+  top: 50%;
+  overflow: auto;
+  position: fixed;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  z-index: 1;
+}
+
+.hidden {
+  display: none;
+}
+
+#synth {
+  background-color: black;
+  color: white;
+  left: 50%;
+  position: absolute;
+}
+
+#synth:hover {
+  background-color: white;
+  color: black;
+  cursor: pointer;
 }

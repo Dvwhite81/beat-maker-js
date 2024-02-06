@@ -1,38 +1,63 @@
 import 'the-new-css-reset/css/reset.css';
 import '../styles/style.css';
+// import * as Tone from 'tone';
+import { INSTRUMENTS } from './instrument-helpers';
+import { buildSetupSection, buildInstrumentSection } from './builders';
 
-const tomSound = document.getElementById('drum-tom-audio');
-const tomBtn = document.querySelector('.tom-btn');
+let tempo = 130;
+console.log('TEMPO START:', tempo);
+const setTempo = (newTempo) => {
+  console.log('setTempo');
+  tempo = newTempo;
+  console.log('TEMPO MIDDLE:', tempo);
+};
+let numBeats = 4;
+const setNumBeats = (newNumBeats) => (numBeats = newNumBeats);
+let numMeasures = 8;
+const setNumMeasures = (newNumMeasures) => (numMeasures = newNumMeasures);
 
-const clapSound = document.getElementById('drum-clap-audio');
-const clapBtn = document.querySelector('.clap-btn');
+const typeRows = [];
+const allSounds = [];
 
-const kickSound = document.getElementById('drum-kick-audio');
-const kickBtn = document.querySelector('.kick-btn');
+buildSetupSection(
+  tempo,
+  setTempo,
+  numBeats,
+  setNumBeats,
+  numMeasures,
+  setNumMeasures,
+);
 
-const closedhatSound = document.getElementById('drum-closedhat-audio');
-const closedhatBtn = document.querySelector('.closedhat-btn');
+const musicSection = document.querySelector('#all-instrument-sections');
 
-const openhatSound = document.getElementById('drum-openhat-audio');
-const openhatBtn = document.querySelector('.openhat-btn');
+for (const type of INSTRUMENTS) {
+  const instrumentSection = buildInstrumentSection(type, numBeats, numMeasures);
+  musicSection.append(instrumentSection);
 
-const boomSound = document.getElementById('drum-boom-audio');
-const boomBtn = document.querySelector('.boom-btn');
+  for (const choice of type.choices) {
+    const typeName = type.type;
+    const { options } = choice;
 
-const rideSound = document.getElementById('drum-ride-audio');
-const rideBtn = document.querySelector('.ride-btn');
+    const choiceRow = [];
 
-const snareSound = document.getElementById('drum-snare-audio');
-const snareBtn = document.querySelector('.snare-btn');
+    for (const option of options) {
+      const sound = document.querySelector(
+        `#${typeName}-${option.soundName}-audio`,
+      );
+      const btn = document.querySelector(`.${option.soundName}-btn`);
 
-const toms = document.querySelectorAll('.drum-tom');
-const claps = document.querySelectorAll('.drum-clap');
-const kicks = document.querySelectorAll('.drum-kick');
-const openhats = document.querySelectorAll('.drum-openhat');
-const closedhats = document.querySelectorAll('.drum-closedhat');
-const booms = document.querySelectorAll('.drum-boom');
-const rides = document.querySelectorAll('.drum-ride');
-const snares = document.querySelectorAll('.drum-snare');
+      const playChoiceSound = () => {
+        sound.currentTime = 0;
+        sound.play();
+      };
+
+      allSounds.push(playChoiceSound);
+      btn.addEventListener('click', () => playChoiceSound());
+      choiceRow.push(btn);
+    }
+    typeRows.push(choiceRow);
+  }
+}
 
 const playBtn = document.querySelector('.play');
 const stopBtn = document.querySelector('.stop');
@@ -49,23 +74,14 @@ const toggleBtns = (list) => {
   });
 };
 
-const btnLists = [
-  toms,
-  claps,
-  kicks,
-  closedhats,
-  openhats,
-  booms,
-  rides,
-  snares,
-];
+const allSquares = document.querySelectorAll('.square');
+toggleBtns(allSquares);
 
-btnLists.forEach((list) => toggleBtns(list));
-
-const tempo = 200;
-
-const interate = (list, timing, sound) => {
-  list.forEach((el, i) => {
+const interate = (row, timing, sound) => {
+  console.log('iterate');
+  const { children } = row;
+  const squares = Array.from(children);
+  squares.forEach((el, i) => {
     setTimeout(() => {
       el.classList.add('active-btn');
       if (el.classList.contains('play')) {
@@ -78,70 +94,21 @@ const interate = (list, timing, sound) => {
   });
 };
 
-const playTom = () => {
-  tomSound.currentTime = 0;
-  tomSound.play();
-};
-
-const playClap = () => {
-  clapSound.currentTime = 0;
-  clapSound.play();
-};
-
-const playKick = () => {
-  kickSound.currentTime = 0;
-  kickSound.play();
-};
-
-const playClosedhat = () => {
-  closedhatSound.currentTime = 0;
-  closedhatSound.play();
-};
-
-const playOpenhat = () => {
-  openhatSound.currentTime = 0;
-  openhatSound.play();
-};
-
-const playBoom = () => {
-  boomSound.currentTime = 0;
-  boomSound.play();
-};
-
-const playRide = () => {
-  rideSound.currentTime = 0;
-  rideSound.play();
-};
-
-const playSnare = () => {
-  snareSound.currentTime = 0;
-  snareSound.play();
-};
-
-tomBtn.addEventListener('click', () => playTom());
-clapBtn.addEventListener('click', () => playClap());
-kickBtn.addEventListener('click', () => playKick());
-closedhatBtn.addEventListener('click', () => playClosedhat());
-openhatBtn.addEventListener('click', () => playOpenhat());
-boomBtn.addEventListener('click', () => playBoom());
-rideBtn.addEventListener('click', () => playRide());
-snareBtn.addEventListener('click', () => playSnare());
+const allRows = document.querySelectorAll('.board .row');
 
 const playSounds = () => {
-  interate(toms, tempo, playTom);
-  interate(claps, tempo, playClap);
-  interate(kicks, tempo, playKick);
-  interate(closedhats, tempo, playClosedhat);
-  interate(openhats, tempo, playOpenhat);
-  interate(booms, tempo, playBoom);
-  interate(rides, tempo, playRide);
-  interate(snares, tempo, playSnare);
+  console.log('TEMPO playSounds:', tempo);
+  for (let i = 0; i < allRows.length; i++) {
+    interate(allRows[i], tempo, allSounds[i]);
+  }
 };
 
 let musicPlaying;
 
 const play = () => {
-  musicPlaying = setInterval(playSounds, tempo * 8);
+  console.log('play');
+  playSounds();
+  musicPlaying = setInterval(playSounds, tempo * 32);
   playBtn.style.display = 'none';
   stopBtn.style.display = 'block';
 };
@@ -152,6 +119,17 @@ const stop = () => {
   playBtn.style.display = 'block';
 };
 
-console.log('playBtn:', playBtn);
 playBtn.addEventListener('click', () => play());
 stopBtn.addEventListener('click', () => stop());
+
+/*
+const synthBtn = document.getElementById('synth');
+const synth = new Tone.AMSynth().toDestination();
+
+const playC = () => {
+  console.log('C');
+  synth.triggerAttackRelease('G2', '2n');
+};
+
+synthBtn.addEventListener('click', playC);
+*/
