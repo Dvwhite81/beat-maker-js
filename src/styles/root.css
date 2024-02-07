@@ -1,0 +1,60 @@
+:root {
+  --small-square-size: 4vh;
+  --large-square-size: 8vh;
+  --blue-bg: #00b7d4;
+  --orange-bg: #f78259;
+}
+
+* {
+  font-family: roboto, sans-serif;
+  font-weight: 400;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #616161; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #9bc5c3,
+    #616161
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #9bc5c3,
+    #616161
+  ) !important; /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+@font-face {
+  font-family: 'roboto';
+  src: url('../assets/fonts/Roboto-Thin.ttf');
+  font-weight: 200;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'roboto';
+  src: url('../assets/fonts/Roboto-Regular.ttf');
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'roboto';
+  src: url('../assets/fonts/Roboto-Medium.ttf');
+  font-weight: 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'roboto';
+  src: url('../assets/fonts/Roboto-Bold.ttf');
+  font-weight: 900;
+  font-display: swap;
+}

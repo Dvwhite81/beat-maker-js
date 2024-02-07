@@ -88,9 +88,11 @@ const toggleIcons = (element) => {
 
 const maximizeDiv = (element) => {
   element.classList.add('selected');
+  element.classList.remove('collapsed');
 };
 
 const collapseDiv = (element) => {
+  element.classList.add('collapsed');
   element.classList.remove('selected');
 };
 
@@ -193,61 +195,116 @@ const buildInfoBeat = (index) => {
   });
 };
 
-const buildInfoMeasure = (numBeats) => {
+const buildInfoMeasure = (index) => {
   const infoMeasure = buildElement('div', {
     className: 'info-measure',
   });
 
-  for (let i = 1; i <= numBeats; i++) {
-    const infoBeat = buildInfoBeat(i);
-    infoMeasure.append(infoBeat);
-  }
+  const measureLabel = buildElement('p', {
+    className: 'info-measure-label',
+    textContent: index,
+  });
+
+  infoMeasure.append(measureLabel);
 
   return infoMeasure;
 };
 
-const buildInfoRow = (numBeats, numMeasures) => {
-  const row = buildElement('div', {
-    className: 'info-row row',
+const buildInfoBeatRow = (numBeats, numMeasures) => {
+  const beatRow = buildElement('div', {
+    className: 'info-beat-row',
   });
 
-  for (let i = 1; i <= numMeasures; i++) {
-    const infoMeasure = buildInfoMeasure(numBeats);
-    row.append(infoMeasure);
-  }
-
-  return row;
-};
-
-const buildInfoSection = (numBeats, numMeasures) => {
-  const infoSection = buildElement('div', {
-    className: 'info-section',
-  });
-
-  const infoLabel = buildElement('div', {
+  const beatLabelDiv = buildElement('div', {
     className: `audio info info-btn`,
   });
 
-  const label = buildElement('p', {
+  const beatLabel = buildElement('p', {
+    className: 'sound-btn-label',
+    textContent: 'Beats:',
+  });
+
+  beatLabelDiv.append(beatLabel);
+  beatRow.append(beatLabelDiv);
+
+  const beatDisplay = buildElement('div', {
+    className: 'info-beat-display',
+  });
+
+  for (let i = 1; i <= numMeasures; i++) {
+    const beatMeasureDisplay = buildElement('div', {
+      className: 'info-beat-measure-display',
+    });
+
+    for (let j = 1; j <= numBeats; j++) {
+      const infoBeat = buildInfoBeat(j);
+      beatMeasureDisplay.append(infoBeat);
+    }
+    beatDisplay.append(beatMeasureDisplay);
+  }
+
+  beatRow.append(beatDisplay);
+
+  return beatRow;
+};
+
+const buildInfoMeasureRow = (numMeasures) => {
+  const measureRow = buildElement('div', {
+    className: 'info-measure-row',
+  });
+
+  const measureLabelDiv = buildElement('div', {
+    className: `audio info info-btn`,
+  });
+
+  const measureLabel = buildElement('p', {
     className: 'sound-btn-label',
     textContent: 'Measures:',
   });
 
-  infoLabel.append(label);
-  infoSection.append(infoLabel);
+  measureLabelDiv.append(measureLabel);
+  measureRow.append(measureLabelDiv);
 
-  const infoRow = buildInfoRow(numBeats, numMeasures);
-  infoSection.append(infoRow);
+  const measureDisplay = buildElement('div', {
+    className: 'info-measure-display',
+  });
+
+  measureDisplay.style.display = 'grid';
+  measureDisplay.style.gridTemplateColumns = `repeat(${numMeasures}, 1fr)`;
+
+  for (let i = 1; i <= numMeasures; i++) {
+    const infoMeasure = buildInfoMeasure(i);
+    measureDisplay.append(infoMeasure);
+  }
+
+  measureRow.append(measureDisplay);
+
+  return measureRow;
+};
+
+const buildInfoSection = (numBeats, numMeasures) => {
+  console.log('buildInfoSection numBeats:', numBeats);
+  console.log('buildInfoSection numMeasures:', numMeasures);
+  const infoSection = buildElement('div', {
+    className: 'info-section',
+  });
+
+  const infoMeasureRow = buildInfoMeasureRow(numMeasures);
+  infoSection.append(infoMeasureRow);
+
+  const infoBeatRow = buildInfoBeatRow(numBeats, numMeasures);
+  infoSection.append(infoBeatRow);
 
   return infoSection;
 };
 
-const buildInstrumentSection = (type, numBeats, numMeasures) => {
+const buildInstrumentSection = (type, beatDivision, numBeats, numMeasures) => {
+  console.log('buildInstrumentSection beatDivision:', beatDivision);
   console.log('buildInstrumentSection numBeats:', numBeats);
   console.log('buildInstrumentSection numMeasures:', numMeasures);
   const typeName = type.type;
   const wholeSection = buildElement('div', {
-    className: `instrument ${typeName}-instrument`,
+    className: `instrument ${typeName}-instrument collapsed`,
   });
 
   const section = buildElement('div', {
@@ -257,8 +314,12 @@ const buildInstrumentSection = (type, numBeats, numMeasures) => {
   const titleDiv = buildBoardTitle(typeName);
   wholeSection.append(titleDiv);
 
+  const bottomDiv = buildElement('div', {
+    className: 'outer-info-section',
+  });
+
   const infoSection = buildInfoSection(numBeats, numMeasures);
-  wholeSection.append(infoSection);
+  bottomDiv.append(infoSection);
 
   const choices = getInstrumentSounds(typeName);
   console.log('choices:', choices);
@@ -269,7 +330,9 @@ const buildInstrumentSection = (type, numBeats, numMeasures) => {
   const board = buildSoundBoard(typeName, choices, totalBeats);
 
   section.append(btnSection, board);
-  wholeSection.append(section);
+  bottomDiv.append(section);
+
+  wholeSection.append(bottomDiv);
   return wholeSection;
 };
 
@@ -299,6 +362,8 @@ const buildSetupInput = (labelText, value, func) => {
 const buildSetupSection = (
   tempo,
   setTempo,
+  beatDivision,
+  setBeatDivision,
   numBeats,
   setNumBeats,
   numMeasures,
@@ -307,6 +372,11 @@ const buildSetupSection = (
   const setupSection = document.querySelector('#setup-container');
 
   const tempoInput = buildSetupInput('Tempo: ', tempo, setTempo);
+  const beatDivisionInput = buildSetupInput(
+    'Beat Division: ',
+    beatDivision,
+    setBeatDivision,
+  );
   const beatsInput = buildSetupInput(
     'Beats Per Measure: ',
     numBeats,
@@ -318,7 +388,7 @@ const buildSetupSection = (
     setNumMeasures,
   );
 
-  setupSection.append(tempoInput, beatsInput, measuresInput);
+  setupSection.append(tempoInput, beatDivisionInput, beatsInput, measuresInput);
 };
 
 export { buildInstrumentSection, buildSetupSection };

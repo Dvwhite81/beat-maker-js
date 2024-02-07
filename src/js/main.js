@@ -4,6 +4,12 @@ import '../styles/style.css';
 import { INSTRUMENTS } from './instrument-helpers';
 import { buildSetupSection, buildInstrumentSection } from './builders';
 
+const beatDivisions = {
+  quarter: 1,
+  eighth: 2,
+  sixteenth: 4,
+};
+
 let tempo = 130;
 console.log('TEMPO START:', tempo);
 const setTempo = (newTempo) => {
@@ -11,6 +17,9 @@ const setTempo = (newTempo) => {
   tempo = newTempo;
   console.log('TEMPO MIDDLE:', tempo);
 };
+
+let beatDivision = beatDivisions.sixteenth;
+const setBeatDivision = (newBeatDivision) => (beatDivision = newBeatDivision);
 let numBeats = 4;
 const setNumBeats = (newNumBeats) => (numBeats = newNumBeats);
 let numMeasures = 8;
@@ -22,6 +31,8 @@ const allSounds = [];
 buildSetupSection(
   tempo,
   setTempo,
+  beatDivision,
+  setBeatDivision,
   numBeats,
   setNumBeats,
   numMeasures,
@@ -31,7 +42,12 @@ buildSetupSection(
 const musicSection = document.querySelector('#all-instrument-sections');
 
 for (const type of INSTRUMENTS) {
-  const instrumentSection = buildInstrumentSection(type, numBeats, numMeasures);
+  const instrumentSection = buildInstrumentSection(
+    type,
+    beatDivision,
+    numBeats,
+    numMeasures,
+  );
   musicSection.append(instrumentSection);
 
   for (const choice of type.choices) {
