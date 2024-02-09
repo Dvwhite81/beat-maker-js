@@ -1,31 +1,17 @@
-@import './root.css';
-@import './setup.css';
-@import './instruments.css';
-@import './instrument-sections.css';
-@import './info-sections.css';
-@import './boards.css';
+@import './modal.css';
+@import './Settings.css';
 
 #container {
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-  position: relative;
-  width: 100vw;
+  display: grid;
+  grid-template-rows: 1fr 9fr;
+  height: 100%;
+  width: 100%;
+}
+
+.icon {
+  cursor: pointer;
 }
 
 .hidden {
   display: none;
-}
-
-#synth {
-  background-color: black;
-  color: white;
-  left: 50%;
-  position: absolute;
-}
-
-#synth:hover {
-  background-color: white;
-  color: black;
-  cursor: pointer;
 }

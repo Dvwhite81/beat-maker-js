@@ -1,6 +1,24 @@
 import 'the-new-css-reset/css/reset.css';
 import '../styles/style.css';
+import initialSetup from './build-functions/setup';
+import { INITIAL_SETTINGS } from './helpers';
 // import * as Tone from 'tone';
+let [tempo, beatDivision, numBeats, numMeasures] = INITIAL_SETTINGS;
+
+const setTempo = (num) => (tempo = num);
+const setBeatDivision = (num) => (beatDivision = num);
+const setNumBeats = (num) => (numBeats = num);
+const setNumMeasures = (num) => (numMeasures = num);
+
+if (beatDivision === 99) {
+  setTempo(0);
+  setBeatDivision(0);
+  setNumBeats(0);
+  setNumMeasures(0);
+}
+console.log(tempo, beatDivision, numBeats, numMeasures);
+initialSetup(tempo, beatDivision, numBeats, numMeasures);
+/*
 import { INSTRUMENTS } from './instrument-helpers';
 import { buildSetupSection, buildInstrumentSection } from './builders';
 
