@@ -1,0 +1,58 @@
+#main-container {
+  display: grid;
+  height: 100%;
+  margin: auto;
+  width: 100%;
+}
+
+.instrument-section {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  width: 90%;
+}
+
+.instrument-title,
+.track {
+  height: var(--small-square-size);
+}
+
+.title-icon-div,
+.instrument-section .btn,
+.track-control {
+  height: 100%;
+}
+
+.instrument-section .icon {
+  height: 90%;
+}
+
+.instrument-title {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  text-align: center;
+  width: 100%;
+}
+
+.title-icon-div {
+  height: 100%;
+  position: absolute;
+  right: 0;
+}
+
+.track-control {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  width: 30vw;
+}
+
+.track-select {
+  bottom: calc(var(--small-square-size) * -1);
+}
+
+.selected .track-select {
+  bottom: calc(var(--large-square-size) * -1);
+}

@@ -1,3 +1,4 @@
+import { buildMainContainer } from './boards';
 import { buildModal, updateModal } from './modal';
 import { buildSettingsContainer, updateSettingsContainer } from './settings';
 
@@ -11,7 +12,8 @@ const initialSetup = (...args) => {
   resetHtml();
   const modal = buildModal();
   const settingsContainer = buildSettingsContainer();
-  container.append(modal, settingsContainer);
+  const mainContainer = buildMainContainer();
+  container.append(modal, settingsContainer, mainContainer);
   updateModal(...args);
   updateSettingsContainer(...args);
 };
