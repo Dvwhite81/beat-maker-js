@@ -1,6 +1,8 @@
 @import './modal.css';
 @import './settings.css';
 @import './boards.css';
+@import './tracks.css';
+@import './squares.css';
 
 :root {
   --small-square-size: 5vh;
@@ -21,6 +23,22 @@
   display: grid;
   grid-template-rows: 1fr 9fr;
   height: 100vh;
+}
+
+.tooltip .tooltiptext {
+  background-color: #000;
+  border-radius: 6px;
+  color: #fff;
+  padding: 0.5rem;
+  position: absolute;
+  text-align: center;
+  visibility: hidden;
+  width: fit-content;
+  z-index: 1;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
 }
 
 .icon {

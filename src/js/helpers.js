@@ -1,3 +1,12 @@
+import { toggleInstrumentSelectOpen } from './build-functions/settings';
+import { addInstrument } from './music-functions/functions';
+
+const buildElement = (type, args) => {
+  const element = document.createElement(type);
+  for (const key in args) element[key] = args[key];
+  return element;
+};
+
 export const INSTRUMENTS = [
   {
     type: 'drums',
@@ -145,7 +154,6 @@ export const INITIAL_SETTINGS = [
 
 export const getInstrumentSounds = (type) => {
   // switch to get sound names and sources
-  console.log('type:', type);
   return INSTRUMENTS.find((i) => i.type === type).choices;
 };
 
@@ -157,7 +165,6 @@ const getInstrumentFromSection = (id) => {
 export const getUsedInstruments = () => {
   const allBoards = document.querySelectorAll('.instrument-section');
   if (allBoards.length === 0) return [];
-  console.log('allBoards:', allBoards);
   const used = [];
 
   for (const board of allBoards) {
@@ -170,8 +177,8 @@ export const getUsedInstruments = () => {
 };
 
 export const getAvailableInstruments = () => {
+  console.log('getAvailableInstruments');
   const usedInstruments = getUsedInstruments();
-  console.log('used:', usedInstruments);
   return INSTRUMENTS.filter((i) => !usedInstruments.includes(i));
 };
 
@@ -182,13 +189,58 @@ export const handleMainGrid = () => {
   mainContainer.style.gridTemplateColumns =
     length > 2 ? 'repeat(2, 1fr)' : '1fr';
   mainContainer.style.gridTemplateRows =
-    length < 3 ? 'repeat(2, 1fr)' : `repeat(${Math.ceil(length / 2)}, 1fr)`;
+    length === 1
+      ? '1fr'
+      : length === 2
+        ? 'repeat(2, 1fr)'
+        : `repeat(${Math.ceil(length / 2)}, 1fr)`;
 };
 
-const buildElement = (type, args) => {
-  const element = document.createElement(type);
-  for (const key in args) element[key] = args[key];
-  return element;
+export const updateInstrumentSelect = (select) => {
+  select.innerHTML = '';
+
+  const availableInstruments = getAvailableInstruments();
+  for (const instrument of availableInstruments) {
+    const { type, displayName } = instrument;
+    const optionElement = buildElement('li', {
+      className: 'select-option',
+      textContent: displayName,
+    });
+
+    optionElement.addEventListener('click', () => {
+      toggleInstrumentSelectOpen();
+      addInstrument(type);
+      optionElement.remove();
+    });
+
+    select.append(optionElement);
+  }
+};
+
+export const handleOtherBoardOnMinimize = (type) => {
+  const allBoards = Array.from(document.querySelectorAll('.board'));
+  if (allBoards.length !== 2) {
+    return;
+  }
+
+  const mainContainer = document.querySelector('#main-container');
+  const allSections = Array.from(
+    document.querySelectorAll('.instrument-section'),
+  );
+  const otherBoard = allBoards.find((s) => s.id !== `${type}-board`);
+
+  mainContainer.classList.add('main-flex');
+  allSections.forEach((section) => section.classList.add('zero-auto'));
+  otherBoard.classList.add('maximized');
+
+  const allBtns = Array.from(document.querySelectorAll('button'));
+  allBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      mainContainer.classList.remove('min-flex');
+      allSections.forEach((section) => section.classList.remove('zero-auto'));
+      otherBoard.classList.remove('maximized');
+    });
+  });
 };
 
 export default buildElement;

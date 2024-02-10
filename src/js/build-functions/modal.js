@@ -1,10 +1,23 @@
 import buildElement, { INITIAL_SETTINGS } from '../helpers';
+import { setAllSettings } from '../main';
 
 const openModal = () =>
   (document.querySelector('#modal').style.display = 'flex');
 
 const closeModal = () =>
   (document.querySelector('#modal').style.display = 'none');
+
+const getSettingsFromModal = () => {
+  const settings = [];
+
+  const inputs = document.querySelectorAll('.modal-input');
+  for (const input of inputs) {
+    const { value } = input;
+    settings.push(value);
+  }
+
+  return settings;
+};
 
 const buildModalInput = (setting) => {
   const { name, labelText } = setting;
@@ -52,6 +65,12 @@ const buildModal = () => {
     className: 'btn',
     type: 'button',
     textContent: 'Looks Good',
+  });
+
+  submitBtn.addEventListener('click', () => {
+    const newSettings = getSettingsFromModal();
+    setAllSettings(...newSettings);
+    closeModal();
   });
 
   modal.append(closeBtn, modalContent, submitBtn);

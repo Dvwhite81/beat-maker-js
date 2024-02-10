@@ -12,12 +12,16 @@
   width: 90%;
 }
 
-.instrument-title,
-.track {
+.instrument-section * {
+  font-size: large;
+}
+
+.instrument-title {
+  font-weight: bold;
   height: var(--small-square-size);
 }
 
-.title-icon-div,
+.right-title-icon-div,
 .instrument-section .btn,
 .track-control {
   height: 100%;
@@ -36,23 +40,38 @@
   width: 100%;
 }
 
-.title-icon-div {
+.left-title-icon-div,
+.right-title-icon-div {
   height: 100%;
   position: absolute;
+}
+
+.left-title-icon-div {
+  left: 0;
+}
+
+.right-title-icon-div {
   right: 0;
 }
 
-.track-control {
-  display: flex;
-  justify-content: space-between;
-  position: relative;
-  width: 30vw;
+.board {
+  max-width: 90vw;
+  overflow-x: scroll;
 }
 
-.track-select {
-  bottom: calc(var(--small-square-size) * -1);
+.main-flex {
+  display: flex!important;
+  flex-direction: column;
 }
 
-.selected .track-select {
-  bottom: calc(var(--large-square-size) * -1);
+.zero-auto {
+  margin: 0 auto;
+}
+
+.minimized {
+  height: 10vh;
+}
+
+.maximized {
+  height: 70vh;
 }

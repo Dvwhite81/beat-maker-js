@@ -1,17 +1,17 @@
 import buildElement, {
   INITIAL_SETTINGS,
-  getAvailableInstruments,
+  updateInstrumentSelect,
 } from '../helpers';
-import { addInstrument } from '../main';
 import { openModal } from './modal';
 
 // Toggle Functions
-const toggleInstrumentSelectOpen = () => {
+export const toggleInstrumentSelectOpen = () => {
   const select = document.querySelector('#add-instrument-select');
-  const addIcon = document.querySelector('#add-icon');
-  const minusIcon = document.querySelector('#minus-icon');
+  const addIcon = document.querySelector('#settings-add-icon');
+  const minusIcon = document.querySelector('#settings-minus-icon');
 
   if (select.classList.contains('hidden')) {
+    updateInstrumentSelect(select);
     select.classList.remove('hidden');
     minusIcon.classList.remove('hidden');
     addIcon.classList.add('hidden');
@@ -26,8 +26,13 @@ const toggleInstrumentSelectOpen = () => {
 const buildSettingsBtn = () => {
   const btn = buildElement('btn', {
     id: 'edit-settings-btn',
-    className: 'btn',
+    className: 'btn tooltip',
     type: 'button',
+  });
+
+  const tooltiptext = buildElement('span', {
+    className: 'tooltiptext',
+    textContent: 'Edit Settings',
   });
 
   const icon = buildElement('img', {
@@ -36,7 +41,7 @@ const buildSettingsBtn = () => {
   icon.src = '/gear-icon.png';
   icon.alt = 'gear icon';
 
-  btn.append(icon);
+  btn.append(tooltiptext, icon);
 
   btn.addEventListener('click', openModal);
   return btn;
@@ -45,54 +50,43 @@ const buildSettingsBtn = () => {
 const buildAddInstrumentBtn = () => {
   const btn = buildElement('btn', {
     id: 'add-instrument-btn',
-    className: 'btn',
+    className: 'btn tooltip',
     type: 'button',
   });
 
+  const tooltiptext = buildElement('span', {
+    className: 'tooltiptext',
+    textContent: 'Add Instrument',
+  });
+
   const addIcon = buildElement('img', {
-    id: 'add-icon',
+    id: 'settings-add-icon',
     className: 'icon add-icon',
   });
   addIcon.src = '/add-icon.png';
   addIcon.alt = 'add icon';
 
   const minusIcon = buildElement('img', {
-    id: 'minus-icon',
+    id: 'settings-minus-icon',
     className: 'hidden icon minus-icon',
   });
   minusIcon.src = '/minus-icon.png';
   minusIcon.alt = 'minus icon';
 
-  btn.append(addIcon, minusIcon);
+  btn.append(tooltiptext, addIcon, minusIcon);
 
   btn.addEventListener('click', toggleInstrumentSelectOpen);
   return btn;
 };
 
 // Dropdown select
-const buildAddInstrumentSelect = () => {
+export const buildAddInstrumentSelect = () => {
   const select = buildElement('ul', {
     id: 'add-instrument-select',
     className: 'hidden select add-instrument-select',
   });
 
-  const availableInstruments = getAvailableInstruments();
-  console.log('available:', availableInstruments);
-  for (const instrument of availableInstruments) {
-    const { type, displayName } = instrument;
-    const optionElement = buildElement('li', {
-      className: 'select-option',
-      textContent: displayName,
-    });
-
-    optionElement.addEventListener('click', () => {
-      toggleInstrumentSelectOpen();
-      addInstrument(type);
-      optionElement.remove();
-    });
-
-    select.append(optionElement);
-  }
+  updateInstrumentSelect(select);
 
   return select;
 };

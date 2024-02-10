@@ -1,0 +1,49 @@
+.square {
+  border: 1px solid;
+  cursor: pointer;
+  height: var(--small-square-size);
+  opacity: 0.3;
+  transition: all 0.2s;
+  width: var(--small-square-size);
+}
+
+.selected .square {
+  height: var(--large-square-size);
+  width: var(--large-square-size);
+}
+
+.board .row .active-btn {
+  transform: scale(1.2);
+}
+
+.board .track:nth-child(1) .square {
+  background-color: #00b7d4;
+}
+
+.board .track:nth-child(2) .square {
+  background-color: #ff80ff;
+}
+
+.board .track:nth-child(3) .square {
+  background-color: #cde800;
+}
+
+.board .track:nth-child(4) .square {
+  background-color: #ff6961;
+}
+
+.board .track:nth-child(5) .square {
+  background-color: #7659f7;
+}
+
+.board .track:nth-child(6) .square {
+  background-color: #20e381;
+}
+
+.board .track:nth-child(7) .square {
+  background-color: #1d56b8;
+}
+
+.square.play {
+  opacity: 1;
+}

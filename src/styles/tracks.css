@@ -1,0 +1,39 @@
+.track,
+.track-squares,
+.measure-section,
+.beat-section {
+  display: flex;
+  height: var(--small-square-size);
+}
+
+.track-control {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  min-width: 30vw;
+  position: relative;
+}
+
+/* new */
+.track-control:hover {
+  background-color: black;
+  color: whitesmoke;
+}
+
+/* new */
+.track-label {
+  cursor: pointer;
+  font-weight: bold;
+  text-align: center;
+  width: 100%;
+}
+
+.track-select {
+  /* new */
+  top: var(--small-square-size);
+  width: 100%;
+}
+
+.selected .track-select {
+  bottom: calc(var(--large-square-size) * -1);
+}

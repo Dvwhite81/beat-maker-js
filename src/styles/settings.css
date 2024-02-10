@@ -28,13 +28,30 @@
 
 #settings-container .btn {
   cursor: pointer;
-  height: 5vh;
+  display: flex;
+  height: 8vh;
   margin: 0 auto;
+  width: 8vh;
 }
 
 #settings-container .btn:hover {
   background: gainsboro;
   border-radius: 50%;
+}
+
+#settings-container .btn .icon {
+  height: 5vh;
+  margin: auto;
+}
+
+#settings-container #edit-settings-btn.tooltip .tooltiptext {
+  bottom: -6vh;
+  left: 4vw;
+}
+
+#settings-container #add-instrument-btn.tooltip .tooltiptext {
+  right: 4vw;
+  bottom: -6vh;
 }
 
 .select {
@@ -45,12 +62,12 @@
   position: absolute;
   right: 0;
   text-align: center;
-  width: 20vw;
   z-index: 1;
 }
 
 #add-instrument-select {
   bottom: -10vh;
+  width: 20vw;
 }
 
 .select-option:hover {

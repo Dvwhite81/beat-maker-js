@@ -39,6 +39,7 @@
     "no-param-reassign": "off",
     "guard-for-in": "off",
     "no-plusplus": "off",
-    "no-return-assign": "off"
+    "no-return-assign": "off",
+    "no-nested-ternary": "off"
   }
 }

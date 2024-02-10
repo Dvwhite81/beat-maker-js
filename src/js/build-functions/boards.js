@@ -1,9 +1,11 @@
-import buildElement from '../helpers';
+import buildElement, { handleOtherBoardOnMinimize } from '../helpers';
+import { removeInstrument } from '../music-functions/functions';
+import buildTrack from './tracks';
 
 // Toggle Functions
-const toggleExpandIcon = (name) => {
-  const expandIcon = document.querySelector(`#${name}-expand-icon`);
-  const collapseIcon = document.querySelector(`#${name}-collapse-icon`);
+const toggleExpandIcon = (type) => {
+  const expandIcon = document.querySelector(`#${type}-expand-icon`);
+  const collapseIcon = document.querySelector(`#${type}-collapse-icon`);
 
   if (expandIcon.classList.contains('hidden')) {
     expandIcon.classList.remove('hidden');
@@ -14,110 +16,132 @@ const toggleExpandIcon = (name) => {
   }
 };
 
-const toggleMuteBtn = (name) => {
-  const volumeIcon = document.querySelector(`#${name}-volume-icon`);
-  const muteIcon = document.querySelector(`#${name}-mute-icon`);
+const toggleSectionMinimized = (type, btn) => {
+  const board = document.querySelector(`#${type}-board`);
 
-  if (volumeIcon.classList.contains('hidden')) {
-    volumeIcon.classList.remove('hidden');
-    muteIcon.classList.add('hidden');
-  } else if (muteIcon.classList.contains('hidden')) {
-    muteIcon.classList.remove('hidden');
-    volumeIcon.classList.add('hidden');
+  if (board.classList.contains('hidden')) {
+    board.classList.remove('hidden');
+  } else {
+    board.classList.add('hidden');
   }
+
+  // Handle other board - make bigger
+  handleOtherBoardOnMinimize(type, btn);
 };
 
-const toggleSelectOpen = (name) => {
-  const select = document.querySelector(`#${name}-track-select`);
+const toggleMinimizeIcon = (type, btn) => {
+  const addIcon = document.querySelector(`#${type}-title-add-icon`);
+  const minusIcon = document.querySelector(`#${type}-title-minus-icon`);
 
-  if (select.classList.contains('hidden')) {
-    select.classList.remove('hidden');
-  } else {
-    select.classList.add('hidden');
+  if (addIcon.classList.contains('hidden')) {
+    addIcon.classList.remove('hidden');
+    minusIcon.classList.add('hidden');
+  } else if (minusIcon.classList.contains('hidden')) {
+    minusIcon.classList.remove('hidden');
+    addIcon.classList.add('hidden');
   }
+
+  toggleSectionMinimized(type, btn);
 };
 
 // Buttons
-const buildExpandCollapseBtn = (name) => {
+const buildRemoveBtn = (type) => {
+  const btn = buildElement('button', {
+    className: 'btn',
+    type: 'button',
+  });
+
+  const removeIcon = buildElement('img', {
+    id: `${type}-remove-icon`,
+    className: 'icon remove-icon',
+  });
+  removeIcon.src = '/remove-icon.png';
+  removeIcon.alt = 'remove icon';
+
+  btn.append(removeIcon);
+  btn.addEventListener('click', () => removeInstrument(type));
+
+  return btn;
+};
+
+const buildMinimizeBtn = (type) => {
+  const btn = buildElement('button', {
+    className: 'btn',
+    type: 'button',
+  });
+
+  const addIcon = buildElement('img', {
+    id: `${type}-title-add-icon`,
+    className: 'hidden icon add-icon',
+  });
+  addIcon.src = '/add-icon.png';
+  addIcon.alt = 'add icon';
+
+  const minusIcon = buildElement('img', {
+    id: `${type}-title-minus-icon`,
+    className: 'icon minus-icon',
+  });
+  minusIcon.src = '/minus-icon.png';
+  minusIcon.alt = 'minus icon';
+
+  btn.append(addIcon, minusIcon);
+  btn.addEventListener('click', () => toggleMinimizeIcon(type, btn));
+
+  return btn;
+};
+
+const buildExpandCollapseBtn = (type) => {
   const btn = buildElement('button', {
     className: 'btn',
     type: 'button',
   });
 
   const expandIcon = buildElement('img', {
-    id: `${name}-expand-icon`,
+    id: `${type}-expand-icon`,
     className: 'icon expand-collapse-icon',
   });
   expandIcon.src = '/expand-icon.png';
   expandIcon.alt = 'expand icon';
 
   const collapseIcon = buildElement('img', {
-    id: `${name}-collapse-icon`,
+    id: `${type}-collapse-icon`,
     className: 'hidden icon collapse-icon',
   });
   collapseIcon.src = '/collapse-icon.png';
   collapseIcon.alt = 'collapse icon';
 
   btn.append(expandIcon, collapseIcon);
-  btn.addEventListener('click', () => toggleExpandIcon(name));
-  return btn;
-};
-
-const buildMuteBtn = (name) => {
-  const btn = buildElement('button', {
-    id: `${name}-mute-btn`,
-    className: 'btn mute-btn',
-  });
-
-  const volumeIcon = buildElement('img', {
-    id: `${name}-volume-icon`,
-    className: 'icon volume-icon',
-  });
-  volumeIcon.src = '/volume-icon.png';
-  volumeIcon.alt = 'volume icon';
-
-  const muteIcon = buildElement('img', {
-    id: `${name}-mute-icon`,
-    className: 'hidden icon mute-icon',
-  });
-  muteIcon.src = '/mute-icon.png';
-  muteIcon.alt = 'mute icon';
-
-  btn.append(volumeIcon, muteIcon);
-  btn.addEventListener('click', () => toggleMuteBtn(name));
-  return btn;
-};
-
-const buildSelectOpenBtn = (name) => {
-  const btn = buildElement('button', {
-    className: 'btn select-open-btn',
-  });
-
-  const icon = buildElement('img', {
-    className: 'icon select-icon',
-  });
-  icon.src = '/dropdown-icon.png';
-  icon.alt = 'dropdown icon';
-
-  btn.append(icon);
-  btn.addEventListener('click', () => toggleSelectOpen(name));
+  btn.addEventListener('click', () => toggleExpandIcon(type));
   return btn;
 };
 
 // Board Title
-const buildIconDiv = (name) => {
+const buildLeftIconDiv = (type) => {
   const iconDiv = buildElement('div', {
-    className: 'title-icon-div',
+    className: 'left-title-icon-div',
   });
 
-  const btn = buildExpandCollapseBtn(name);
+  const removeBtn = buildRemoveBtn(type);
+
+  const minimizeBtn = buildMinimizeBtn(type);
+
+  iconDiv.append(removeBtn, minimizeBtn);
+  return iconDiv;
+};
+
+const buildRightIconDiv = (type) => {
+  const iconDiv = buildElement('div', {
+    className: 'right-title-icon-div',
+  });
+
+  const btn = buildExpandCollapseBtn(type);
 
   iconDiv.append(btn);
   return iconDiv;
 };
 
 const buildBoardTitle = (instrument) => {
-  const { name, displayName } = instrument;
+  const { type, displayName } = instrument;
 
   const title = buildElement('div', {
     className: 'instrument-title',
@@ -128,88 +152,11 @@ const buildBoardTitle = (instrument) => {
     textContent: displayName,
   });
 
-  const iconDiv = buildIconDiv(name);
+  const leftIconDiv = buildLeftIconDiv(type);
+  const rightIconDiv = buildRightIconDiv(type);
 
-  title.append(text, iconDiv);
+  title.append(leftIconDiv, text, rightIconDiv);
   return title;
-};
-
-// Track Controls
-const buildTrackLabel = (displayName) => {
-  const label = buildElement('p', {
-    className: 'track-label',
-    textContent: displayName,
-  });
-
-  return label;
-};
-
-const buildOptionSelect = (choice) => {
-  const { name, options } = choice;
-
-  const select = buildElement('ul', {
-    id: `${name}-track-select`,
-    className: 'hidden select track-select',
-  });
-
-  for (const option of options) {
-    const { soundName, soundSrc } = option;
-    const optionElement = buildElement('li', {
-      className: 'select-option',
-      textContent: soundName,
-    });
-    optionElement.value = soundSrc;
-    optionElement.addEventListener('click', () => {
-      toggleSelectOpen(name);
-    });
-
-    select.append(optionElement);
-  }
-
-  return select;
-};
-
-const buildTrackControl = (choice) => {
-  const { name, displayName } = choice;
-
-  const control = buildElement('div', {
-    id: `${name}-track-control`,
-    className: 'track-control',
-  });
-
-  const muteBtn = buildMuteBtn(name);
-  const label = buildTrackLabel(displayName);
-  const openBtn = buildSelectOpenBtn(name);
-  const optionSelect = buildOptionSelect(choice);
-
-  control.append(muteBtn, label, openBtn, optionSelect);
-  return control;
-};
-
-// Track Beats Section
-const buildTrackBeatContainer = (name) => {
-  const beatContainer = buildElement('div', {
-    id: `${name}-track-squares`,
-    className: 'track-squares',
-  });
-
-  return beatContainer;
-};
-
-// Track
-const buildTrack = (choice) => {
-  const { name } = choice;
-
-  const track = buildElement('div', {
-    id: `${name}-track`,
-    className: 'track',
-  });
-
-  const control = buildTrackControl(choice);
-  const beatContainer = buildTrackBeatContainer(name);
-
-  track.append(control, beatContainer);
-  return track;
 };
 
 // Board
@@ -232,8 +179,6 @@ const buildBoard = (instrument) => {
 // Whole Instrument Section
 const buildInstrumentSection = (instrument) => {
   const { type } = instrument;
-  console.log('instrument:', instrument);
-  console.log('type:', type);
 
   const section = buildElement('div', {
     id: `${type}-section`,
