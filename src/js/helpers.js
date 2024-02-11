@@ -435,15 +435,81 @@ export const INSTRUMENTS = [
     displayName: 'Bass',
     choices: [
       {
-        name: 'electric-bass',
-        displayName: 'Electric Bass',
+        name: 'c1',
+        displayName: 'C-1',
         options: [
           {
-            soundName: 'A',
+            soundName: 'C-1',
             soundSrc: '',
           },
+        ],
+      },
+      {
+        name: 'd1',
+        displayName: 'D-1',
+        options: [
           {
-            soundName: 'B',
+            soundName: 'D-1',
+            soundSrc: '',
+          },
+        ],
+      },
+      {
+        name: 'e1',
+        displayName: 'E-1',
+        options: [
+          {
+            soundName: 'E-1',
+            soundSrc: '',
+          },
+        ],
+      },
+      {
+        name: 'f1',
+        displayName: 'F-1',
+        options: [
+          {
+            soundName: 'F-1',
+            soundSrc: '',
+          },
+        ],
+      },
+      {
+        name: 'g1',
+        displayName: 'G-1',
+        options: [
+          {
+            soundName: 'G-1',
+            soundSrc: '',
+          },
+        ],
+      },
+      {
+        name: 'a1',
+        displayName: 'A-1',
+        options: [
+          {
+            soundName: 'A-1',
+            soundSrc: '',
+          },
+        ],
+      },
+      {
+        name: 'b1',
+        displayName: 'B-1',
+        options: [
+          {
+            soundName: 'B-1',
+            soundSrc: '',
+          },
+        ],
+      },
+      {
+        name: 'c2',
+        displayName: 'C-2',
+        options: [
+          {
+            soundName: 'C-2',
             soundSrc: '',
           },
         ],

@@ -1,6 +1,7 @@
 import { INSTRUMENTS, handleMainGrid } from '../helpers';
 import { buildInstrumentSection } from '../build-functions/boards';
 import { openConfirmModal } from '../build-functions/modal';
+import { handleMakeTone, playDrum } from './tones';
 
 export const addInstrument = (instrumentType) => {
   const mainContainer = document.querySelector('#main-container');
@@ -25,12 +26,12 @@ export const removeInstrument = (instrumentType) => {
 
 const playTrackSound = (square) => {
   const name = square.classList[1].split('-')[0];
-  const audio = document.querySelector(`#${name}-track-audio`);
-  console.log('audio:', audio);
-  const { src } = audio;
-  console.log('src:', src);
-  const sound = new Audio(src);
-  sound.play();
+  const drumSection = document.querySelector('#drums-section');
+  if (!drumSection || (drumSection && !drumSection.contains(square))) {
+    handleMakeTone(name);
+  } else {
+    playDrum(name);
+  }
 };
 
 export const playSounds = (currentIndex) => {
