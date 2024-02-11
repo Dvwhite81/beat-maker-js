@@ -9,9 +9,9 @@ const toggleSquareSelected = (square) => {
   }
 };
 
-const buildSquare = (measureIndex, beatIndex, divisionIndex) => {
+const buildSquare = (name, measureIndex, beatIndex, divisionIndex) => {
   const square = buildElement('div', {
-    className: 'square',
+    className: `square ${name}-square`,
   });
 
   square.setAttribute('data-measure', measureIndex);
@@ -25,44 +25,43 @@ const buildSquare = (measureIndex, beatIndex, divisionIndex) => {
   return square;
 };
 
-const buildBeatSection = (measureIndex, beatIndex, beatDivision) => {
+const buildBeatSection = (name, measureIndex, beatIndex, beatDivision) => {
   const beatSection = buildElement('div', {
     className: 'beat-section',
   });
 
   for (let divisionIndex = 1; divisionIndex <= beatDivision; divisionIndex++) {
-    const square = buildSquare(measureIndex, beatIndex, divisionIndex);
+    const square = buildSquare(name, measureIndex, beatIndex, divisionIndex);
     beatSection.append(square);
   }
 
   return beatSection;
 };
 
-const buildMeasureSection = (measureIndex, numBeats, beatDivision) => {
+const buildMeasureSection = (name, measureIndex, numBeats, beatDivision) => {
   const measureSection = buildElement('div', {
     className: 'measure-section',
   });
 
   for (let beatIndex = 1; beatIndex <= numBeats; beatIndex++) {
-    const beat = buildBeatSection(measureIndex, beatIndex, beatDivision);
+    const beat = buildBeatSection(name, measureIndex, beatIndex, beatDivision);
     measureSection.append(beat);
   }
 
   return measureSection;
 };
 
-const buildTrackSquares = () => {
+const buildTrackSquares = (name) => {
   const [beatDivision, numBeats, numMeasures] = getAllSettings();
-  console.log(
-    'buildSquares beatDivision, numBeats, numMeasures:',
-    beatDivision,
-    numBeats,
-    numMeasures,
-  );
   const measures = [];
 
   for (let measureIndex = 1; measureIndex <= numMeasures; measureIndex++) {
-    const measure = buildMeasureSection(measureIndex, numBeats, beatDivision);
+    const measure = buildMeasureSection(
+      name,
+      measureIndex,
+      numBeats,
+      beatDivision,
+    );
     measures.push(measure);
   }
 

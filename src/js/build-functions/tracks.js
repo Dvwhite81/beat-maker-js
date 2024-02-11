@@ -19,12 +19,18 @@ const toggleMuteBtn = (name) => {
 
 const toggleSelectOpen = (name) => {
   const select = document.querySelector(`#${name}-track-select`);
-
+  console.log('toggle select:', select);
   if (select.classList.contains('hidden')) {
     select.classList.remove('hidden');
   } else {
     select.classList.add('hidden');
   }
+};
+
+const setTrackSound = (name, soundSrc) => {
+  const audio = document.querySelector(`#${name}-track-audio`);
+  console.log('audio:', audio);
+  audio.setAttribute('src', soundSrc);
 };
 
 // Buttons
@@ -95,16 +101,20 @@ const buildOptionSelect = (choice) => {
 
   for (const option of options) {
     const { soundName, soundSrc } = option;
+    console.log('soundSrc:', soundSrc);
     const optionElement = buildElement('li', {
       className: 'select-option',
       textContent: soundName,
     });
     optionElement.value = soundSrc;
     optionElement.addEventListener('click', () => {
-      toggleSelectOpen(name);
+      setTrackSound(name, soundSrc);
     });
 
     select.append(optionElement);
+    select.addEventListener('click', () => {
+      toggleSelectOpen(name);
+    });
   }
 
   return select;
@@ -148,13 +158,18 @@ const buildTrack = (choice) => {
     className: 'track',
   });
 
+  const audio = buildElement('audio', {
+    id: `${name}-track-audio`,
+    className: 'track-audio',
+  });
+  audio.setAttribute('src', choice.options[0].soundSrc);
   const control = buildTrackControl(choice);
   const trackSquaresContainer = buildTrackSquaresContainer(name);
 
-  const squares = buildTrackSquares();
+  const squares = buildTrackSquares(name);
   trackSquaresContainer.append(...squares);
 
-  track.append(control, trackSquaresContainer);
+  track.append(audio, control, trackSquaresContainer);
   return track;
 };
 
@@ -164,7 +179,8 @@ export const updateTracksAfterSettingsChange = () => {
   for (const container of allSquaresContainers) {
     container.innerHTML = '';
     console.log('container:', container);
-    const squares = buildTrackSquares();
+    const name = container.id.split('-')[0];
+    const squares = buildTrackSquares(name);
     container.append(...squares);
   }
 };

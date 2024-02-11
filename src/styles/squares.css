@@ -17,7 +17,8 @@
 }
 
 .square.active {
-  transform: scale(1.2);
+  background-color: white!important;
+  /*transform: scale(1.2);*/
 }
 
 .board .track:nth-child(1) .square {

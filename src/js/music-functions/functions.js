@@ -22,3 +22,28 @@ export const removeInstrument = (instrumentType) => {
 
   openConfirmModal(instrumentSection);
 };
+
+const playTrackSound = (square) => {
+  const name = square.classList[1].split('-')[0];
+  const audio = document.querySelector(`#${name}-track-audio`);
+  console.log('audio:', audio);
+  audio.play();
+};
+
+export const playSounds = (currentIndex) => {
+  const { measure, beat, division } = currentIndex;
+  const allSquares = Array.from(document.querySelectorAll('.square'));
+  const squares = Array.from(
+    document.querySelectorAll(
+      `[data-measure="${measure}"][data-beat="${beat}"][data-division="${division}"]`,
+    ),
+  );
+
+  allSquares.forEach((square) => square.classList.remove('active'));
+  squares.forEach((square) => {
+    square.classList.add('active');
+    if (square.classList.contains('play')) {
+      playTrackSound(square);
+    }
+  });
+};

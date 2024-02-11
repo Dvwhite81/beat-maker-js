@@ -24,6 +24,114 @@ export const INSTRUMENTS = [
             soundName: 'kick-2',
             soundSrc: '/kick-2.mp3',
           },
+          {
+            soundName: 'kick-3',
+            soundSrc: '/kick-3.mp3',
+          },
+          {
+            soundName: 'kick-4',
+            soundSrc: '/kick-4.mp3',
+          },
+          {
+            soundName: 'kick-acoustic-1',
+            soundSrc: '/kick-acoustic-1.wav',
+          },
+          {
+            soundName: 'kick-acoustic-2',
+            soundSrc: '/kick-acoustic-2.wav',
+          },
+          {
+            soundName: 'kick-big',
+            soundSrc: '/kick-big.wav',
+          },
+          {
+            soundName: 'kick-classic',
+            soundSrc: '/kick-classic.wav',
+          },
+          {
+            soundName: 'kick-cultivator',
+            soundSrc: '/kick-cultivator.wav',
+          },
+          {
+            soundName: 'kick-deep',
+            soundSrc: '/kick-deep.wav',
+          },
+          {
+            soundName: 'kick-dry',
+            soundSrc: '/kick-dry.wav',
+          },
+          {
+            soundName: 'kick-electro-1',
+            soundSrc: '/kick-electro-1.wav',
+          },
+          {
+            soundName: 'kick-electro-2',
+            soundSrc: '/kick-electro-2.wav',
+          },
+          {
+            soundName: 'kick-floppy',
+            soundSrc: '/kick-floppy.wav',
+          },
+          {
+            soundName: 'kick-gritty',
+            soundSrc: '/kick-gritty.wav',
+          },
+          {
+            soundName: 'kick-heavy',
+            soundSrc: '/kick-heavy.wav',
+          },
+          {
+            soundName: 'kick-newwave',
+            soundSrc: '/kick-newwave.wav',
+          },
+          {
+            soundName: 'kick-oldschool',
+            soundSrc: '/kick-oldschool.wav',
+          },
+          {
+            soundName: 'kick-plain',
+            soundSrc: '/kick-plain.wav',
+          },
+          {
+            soundName: 'kick-slapback',
+            soundSrc: '/kick-slapback.wav',
+          },
+          {
+            soundName: 'kick-softy',
+            soundSrc: '/kick-softy.wav',
+          },
+          {
+            soundName: 'kick-stomp',
+            soundSrc: '/kick-stomp.wav',
+          },
+          {
+            soundName: 'kick-tape',
+            soundSrc: '/kick-tape.wav',
+          },
+          {
+            soundName: 'kick-thump',
+            soundSrc: '/kick-thump.wav',
+          },
+          {
+            soundName: 'kick-tight',
+            soundSrc: '/kick-tight.wav',
+          },
+          {
+            soundName: 'kick-tron',
+            soundSrc: '/kick-tron.wav',
+          },
+          {
+            soundName: 'kick-vinyl-1',
+            soundSrc: '/kick-vinyl-1.wav',
+          },
+          {
+            soundName: 'kick-vinyl-2',
+            soundSrc: '/kick-vinyl-2.wav',
+          },
+          {
+            soundName: 'kick-zapper',
+            soundSrc: '/kick-zapper.wav',
+          },
         ],
       },
       {
@@ -41,7 +149,7 @@ export const INSTRUMENTS = [
         ],
       },
       {
-        name: 'closed-hh',
+        name: 'closedhat',
         displayName: 'Closed Hi-Hat',
         options: [
           {
@@ -51,7 +159,7 @@ export const INSTRUMENTS = [
         ],
       },
       {
-        name: 'open-hh',
+        name: 'openhat',
         displayName: 'Open Hi-Hat',
         options: [
           {

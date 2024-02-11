@@ -4,6 +4,7 @@ import initialSetup from './build-functions/setup';
 import { INITIAL_SETTINGS } from './helpers';
 import { updateSettingsContainer } from './build-functions/settings';
 import { updateTracksAfterSettingsChange } from './build-functions/tracks';
+import { playSounds } from './music-functions/functions';
 // import * as Tone from 'tone';
 let [tempo, beatDivision, numBeats, numMeasures] = INITIAL_SETTINGS;
 const timing = (60000 / tempo.value) * (1 / beatDivision.value);
@@ -40,21 +41,12 @@ const iterateBeats = () => {
   if (currentIndex.division + 1 > bd) {
     if (currentIndex.beat + 1 > nb) {
       if (currentIndex.measure + 1 <= nm) {
-        console.log('increase measure');
-        console.log('currentIndex:', currentIndex);
         increaseMeasure();
-      } else {
-        console.log('restart loop');
-        console.log('currentIndex:', currentIndex);
       }
     } else {
-      console.log('increase beat');
-      console.log('currentIndex:', currentIndex);
       increaseBeat();
     }
   } else {
-    console.log('increase division');
-    console.log('currentIndex:', currentIndex);
     increaseDivision();
   }
 };
@@ -68,6 +60,7 @@ const iterate = () => {
     // eslint-disable-next-line no-loop-func
     setTimeout(() => {
       if (isPlaying) {
+        playSounds(currentIndex);
         iterateBeats();
       }
     }, timing * i);
@@ -103,7 +96,7 @@ const tracksNeedUpdated = (newT, newBD, newNB, newNM) => {
 };
 
 export const setAllSettings = (newT, newBD, newNB, newNM) => {
-  const needUpdate = tracksNeedUpdated(newT, newBD, newNB, newNM);
+  const needsUpdate = tracksNeedUpdated(newT, newBD, newNB, newNM);
 
   tempo = { ...tempo, value: newT };
   beatDivision = { ...beatDivision, value: newBD };
@@ -112,7 +105,7 @@ export const setAllSettings = (newT, newBD, newNB, newNM) => {
 
   updateSettingsContainer(tempo, beatDivision, numBeats, numMeasures);
 
-  if (needUpdate) {
+  if (needsUpdate) {
     updateTracksAfterSettingsChange();
   }
 };
