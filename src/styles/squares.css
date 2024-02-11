@@ -12,7 +12,11 @@
   width: var(--large-square-size);
 }
 
-.board .row .active-btn {
+.square.play {
+  opacity: 1;
+}
+
+.square.active {
   transform: scale(1.2);
 }
 
@@ -42,8 +46,4 @@
 
 .board .track:nth-child(7) .square {
   background-color: #1d56b8;
-}
-
-.square.play {
-  opacity: 1;
 }

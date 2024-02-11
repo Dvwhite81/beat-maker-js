@@ -3,16 +3,38 @@ import { removeInstrument } from '../music-functions/functions';
 import buildTrack from './tracks';
 
 // Toggle Functions
+const toggleOtherSections = (type, isSelecting) => {
+  const mainContainer = document.querySelector('#main-container');
+  const otherSections = Array.from(
+    document.querySelectorAll('.instrument-section'),
+  ).filter((section) => section.id !== `${type}-section`);
+
+  if (isSelecting) {
+    mainContainer.classList.add('single-view');
+    otherSections.forEach((section) => section.classList.add('hidden'));
+  } else {
+    mainContainer.classList.remove('single-view');
+    otherSections.forEach((section) => section.classList.remove('hidden'));
+  }
+};
+
 const toggleExpandIcon = (type) => {
+  const instrumentSection = document.querySelector(`#${type}-section`);
   const expandIcon = document.querySelector(`#${type}-expand-icon`);
   const collapseIcon = document.querySelector(`#${type}-collapse-icon`);
 
   if (expandIcon.classList.contains('hidden')) {
     expandIcon.classList.remove('hidden');
     collapseIcon.classList.add('hidden');
+    instrumentSection.classList.remove('selected');
+    // false for not selecting
+    toggleOtherSections(type, false);
   } else if (collapseIcon.classList.contains('hidden')) {
     collapseIcon.classList.remove('hidden');
     expandIcon.classList.add('hidden');
+    instrumentSection.classList.add('selected');
+    // true for selecting
+    toggleOtherSections(type, true);
   }
 };
 

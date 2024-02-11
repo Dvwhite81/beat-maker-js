@@ -1,6 +1,14 @@
 import buildElement from '../helpers';
 import { getAllSettings } from '../main';
 
+const toggleSquareSelected = (square) => {
+  if (square.classList.contains('play')) {
+    square.classList.remove('play');
+  } else {
+    square.classList.add('play');
+  }
+};
+
 const buildSquare = (measureIndex, beatIndex, divisionIndex) => {
   const square = buildElement('div', {
     className: 'square',
@@ -9,6 +17,10 @@ const buildSquare = (measureIndex, beatIndex, divisionIndex) => {
   square.setAttribute('data-measure', measureIndex);
   square.setAttribute('data-beat', beatIndex);
   square.setAttribute('data-division', divisionIndex);
+
+  square.addEventListener('click', () => {
+    toggleSquareSelected(square);
+  });
 
   return square;
 };

@@ -3,9 +3,15 @@ import { buildInstrumentSection } from '../build-functions/boards';
 import { openConfirmModal } from '../build-functions/modal';
 
 export const addInstrument = (instrumentType) => {
+  const mainContainer = document.querySelector('#main-container');
   const newInstrument = INSTRUMENTS.find((i) => i.type === instrumentType);
   const section = buildInstrumentSection(newInstrument);
-  document.querySelector('#main-container').append(section);
+
+  if (mainContainer.classList.contains('single-view')) {
+    section.classList.add('hidden');
+  }
+
+  mainContainer.append(section);
   handleMainGrid();
 };
 

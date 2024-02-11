@@ -29,6 +29,7 @@
   display: grid;
   grid-template-rows: 1fr 9fr;
   height: 100vh;
+  overflow: hidden;
 }
 
 .tooltip .tooltiptext {

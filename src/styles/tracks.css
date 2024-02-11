@@ -6,11 +6,19 @@
   height: var(--small-square-size);
 }
 
+.selected .track,
+.selected .track-squares,
+.selected .measure-section,
+.selected .beat-section {
+  height: var(--large-square-size);
+}
+
 .track-control {
   align-items: center;
   display: flex;
   justify-content: space-between;
-  min-width: 30vw;
+  max-width: 30vh;
+  min-width: 30vh;
   position: relative;
 }
 

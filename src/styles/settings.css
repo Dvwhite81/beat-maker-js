@@ -1,6 +1,7 @@
 #settings-container {
   align-items: center;
   background-color: black;
+  border-radius: 10px;
   color: whitesmoke;
   display: flex;
   height: 100%;

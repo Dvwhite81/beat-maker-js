@@ -5,11 +5,21 @@
   width: 100%;
 }
 
+#main-container.single-view {
+  grid-template-rows: 1fr!important;
+}
+
 .instrument-section {
+  background-color: lightgray;
   display: flex;
   flex-direction: column;
   margin: auto;
   width: 90%;
+}
+
+.selected.instrument-section {
+  max-height: 90vh;
+  z-index: 1;
 }
 
 .instrument-section * {
