@@ -1,0 +1,80 @@
+#navbar {
+  align-items: center;
+  display: flex;
+  height: 100%;
+  justify-content: space-evenly;
+  position: relative;
+  width: 100%;
+}
+
+#nav-buttons-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+#nav-buttons-container .btn {
+  cursor: pointer;
+  display: flex;
+  height: 8vh;
+  width: 8vh;
+}
+
+#nav-buttons-container .btn:hover {
+  background: gainsboro;
+  border-radius: 50%;
+}
+
+#nav-buttons-container .btn .icon {
+  height: 5vh;
+  margin: auto;
+}
+
+#nav-buttons-container #edit-settings-btn.tooltip .tooltiptext {
+  bottom: -6vh;
+  left: 4vw;
+}
+
+#nav-buttons-container #add-instrument-btn.tooltip .tooltiptext {
+  right: 4vw;
+  bottom: -6vh;
+}
+
+.select {
+  background-color: black;
+  color: whitesmoke;
+  cursor: pointer;
+  font-size: x-large;
+  position: absolute;
+  right: 0;
+  text-align: center;
+  z-index: 1;
+}
+
+#add-instrument-select {
+  bottom: -10vh;
+  width: 20vw;
+}
+
+.select-option:hover {
+  background-color: gainsboro;
+  color: black;
+}
+
+#play-stop-btn {
+  align-items: center;
+  border-radius: 50%;
+  display: flex;
+  height: 7vh;
+  justify-content: center;
+  width: 7vh;
+}
+
+#play-stop-btn:hover {
+  background-color: whitesmoke;
+}
+
+#play-stop-btn .icon {
+    height: 60%;
+    width: 60%;
+}

@@ -1,4 +1,4 @@
-import { toggleInstrumentSelectOpen } from './build-functions/settings';
+import { toggleInstrumentSelectOpen } from './build-functions/navbar';
 import { addInstrument } from './music-functions/functions';
 
 const buildElement = (type, args) => {

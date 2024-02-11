@@ -2,82 +2,6 @@ import buildElement, {
   INITIAL_SETTINGS,
   updateInstrumentSelect,
 } from '../helpers';
-import { openSettingsModal } from './modal';
-
-// Toggle Functions
-export const toggleInstrumentSelectOpen = () => {
-  const select = document.querySelector('#add-instrument-select');
-  const addIcon = document.querySelector('#settings-add-icon');
-  const minusIcon = document.querySelector('#settings-minus-icon');
-
-  if (select.classList.contains('hidden')) {
-    updateInstrumentSelect(select);
-    select.classList.remove('hidden');
-    minusIcon.classList.remove('hidden');
-    addIcon.classList.add('hidden');
-  } else {
-    select.classList.add('hidden');
-    minusIcon.classList.add('hidden');
-    addIcon.classList.remove('hidden');
-  }
-};
-
-// Buttons
-const buildSettingsBtn = () => {
-  const btn = buildElement('btn', {
-    id: 'edit-settings-btn',
-    className: 'btn tooltip',
-    type: 'button',
-  });
-
-  const tooltiptext = buildElement('span', {
-    className: 'tooltiptext',
-    textContent: 'Edit Settings',
-  });
-
-  const icon = buildElement('img', {
-    className: 'icon settings-icon',
-  });
-  icon.src = '/gear-icon.png';
-  icon.alt = 'gear icon';
-
-  btn.append(tooltiptext, icon);
-
-  btn.addEventListener('click', openSettingsModal);
-  return btn;
-};
-
-const buildAddInstrumentBtn = () => {
-  const btn = buildElement('btn', {
-    id: 'add-instrument-btn',
-    className: 'btn tooltip',
-    type: 'button',
-  });
-
-  const tooltiptext = buildElement('span', {
-    className: 'tooltiptext',
-    textContent: 'Add Instrument',
-  });
-
-  const addIcon = buildElement('img', {
-    id: 'settings-add-icon',
-    className: 'icon add-icon',
-  });
-  addIcon.src = '/add-icon.png';
-  addIcon.alt = 'add icon';
-
-  const minusIcon = buildElement('img', {
-    id: 'settings-minus-icon',
-    className: 'hidden icon minus-icon',
-  });
-  minusIcon.src = '/minus-icon.png';
-  minusIcon.alt = 'minus icon';
-
-  btn.append(tooltiptext, addIcon, minusIcon);
-
-  btn.addEventListener('click', toggleInstrumentSelectOpen);
-  return btn;
-};
 
 // Dropdown select
 export const buildAddInstrumentSelect = () => {
@@ -117,20 +41,13 @@ const buildSettingsDiv = (setting) => {
 const buildSettingsContainer = () => {
   const settingsContainer = buildElement('div', {
     id: 'settings-container',
+    className: 'hidden',
   });
-
-  const settingsBtn = buildSettingsBtn();
-  settingsContainer.append(settingsBtn);
 
   for (const setting of INITIAL_SETTINGS) {
     const div = buildSettingsDiv(setting);
     settingsContainer.append(div);
   }
-
-  const addInstrumentBtn = buildAddInstrumentBtn();
-  const instrumentSelect = buildAddInstrumentSelect();
-
-  settingsContainer.append(addInstrumentBtn, instrumentSelect);
 
   return settingsContainer;
 };

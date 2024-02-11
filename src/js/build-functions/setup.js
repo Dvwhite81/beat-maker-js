@@ -1,7 +1,7 @@
 import { buildMainContainer } from './boards';
 import { buildSettingsModal, updateSettingsModal } from './modal';
-import buildPlayBtn from './play-btn';
-import { buildSettingsContainer, updateSettingsContainer } from './settings';
+import buildNavbar from './navbar';
+import { updateSettingsContainer } from './settings';
 
 const container = document.querySelector('#container');
 
@@ -12,10 +12,9 @@ const resetHtml = () => {
 const initialSetup = (...args) => {
   resetHtml();
   const modal = buildSettingsModal();
-  const settingsContainer = buildSettingsContainer();
+  const navbar = buildNavbar();
   const mainContainer = buildMainContainer();
-  const playBtn = buildPlayBtn();
-  container.append(modal, settingsContainer, mainContainer, playBtn);
+  container.append(modal, navbar, mainContainer);
   updateSettingsModal(...args);
   updateSettingsContainer(...args);
 };
