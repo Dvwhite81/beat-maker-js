@@ -146,6 +146,102 @@ export const INSTRUMENTS = [
             soundName: 'snare-2',
             soundSrc: '/snare-2.mp3',
           },
+          {
+            soundName: 'snare-3',
+            soundSrc: '/snare-3.mp3',
+          },
+          {
+            soundName: 'snare-808',
+            soundSrc: '/snare-808.wav',
+          },
+          {
+            soundName: 'snare-acoustic-1',
+            soundSrc: '/snare-acoustic-1.wav',
+          },
+          {
+            soundName: 'snare-acoustic-2',
+            soundSrc: '/snare-acoustic-2.wav',
+          },
+          {
+            soundName: 'snare-analog',
+            soundSrc: '/snare-analog.wav',
+          },
+          {
+            soundName: 'snare-big',
+            soundSrc: '/snare-big.wav',
+          },
+          {
+            soundName: 'snare-block',
+            soundSrc: '/snare-block.wav',
+          },
+          {
+            soundName: 'snare-brute',
+            soundSrc: '/snare-brute.wav',
+          },
+          {
+            soundName: 'snare-dist-1',
+            soundSrc: '/snare-dist-1.wav',
+          },
+          {
+            soundName: 'snare-dist-2',
+            soundSrc: '/snare-dist-2.wav',
+          },
+          {
+            soundName: 'snare-dist-3',
+            soundSrc: '/snare-dist-3.wav',
+          },
+          {
+            soundName: 'snare-electro',
+            soundSrc: '/snare-electro.wav',
+          },
+          {
+            soundName: 'snare-floppy',
+            soundSrc: '/snare-floppy.wav',
+          },
+          {
+            soundName: 'snare-lofi-1',
+            soundSrc: '/snare-lofi-1.wav',
+          },
+          {
+            soundName: 'snare-lofi-2',
+            soundSrc: '/snare-lofi-2.wav',
+          },
+          {
+            soundName: 'snare-modular',
+            soundSrc: '/snare-modular.wav',
+          },
+          {
+            soundName: 'snare-noise',
+            soundSrc: '/snare-noise.wav',
+          },
+          {
+            soundName: 'snare-pinch',
+            soundSrc: '/snare-pinch.wav',
+          },
+          {
+            soundName: 'snare-punch',
+            soundSrc: '/snare-punch.wav',
+          },
+          {
+            soundName: 'snare-smasher',
+            soundSrc: '/snare-smasher.wav',
+          },
+          {
+            soundName: 'snare-sumo',
+            soundSrc: '/snare-sumo.wav',
+          },
+          {
+            soundName: 'snare-tape',
+            soundSrc: '/snare-tape.wav',
+          },
+          {
+            soundName: 'snare-vinyl-1',
+            soundSrc: '/snare-vinyl-1.wav',
+          },
+          {
+            soundName: 'snare-vinyl-2',
+            soundSrc: '/snare-vinyl-2.wav',
+          },
         ],
       },
       {
@@ -153,8 +249,48 @@ export const INSTRUMENTS = [
         displayName: 'Closed Hi-Hat',
         options: [
           {
-            soundName: 'closed-hihat-1',
+            soundName: 'hihat-808',
             soundSrc: '/hihat-808.wav',
+          },
+          {
+            soundName: 'hihat-acoustic-1',
+            soundSrc: '/hihat-acoustic-1.wav',
+          },
+          {
+            soundName: 'hihat-acoustic-2',
+            soundSrc: '/hihat-acoustic-2.wav',
+          },
+          {
+            soundName: 'hihat-analog',
+            soundSrc: '/hihat-analog.wav',
+          },
+          {
+            soundName: 'hihat-digital',
+            soundSrc: '/hihat-digital.wav',
+          },
+          {
+            soundName: 'hihat-dist-1',
+            soundSrc: '/hihat-dist-1.wav',
+          },
+          {
+            soundName: 'hihat-dist-2',
+            soundSrc: '/hihat-dist-2.wav',
+          },
+          {
+            soundName: 'hihat-electro',
+            soundSrc: '/hihat-electro.wav',
+          },
+          {
+            soundName: 'hihat-plain',
+            soundSrc: '/hihat-plain.wav',
+          },
+          {
+            soundName: 'hihat-reso',
+            soundSrc: '/hihat-reso.wav',
+          },
+          {
+            soundName: 'hihat-ring',
+            soundSrc: '/hihat-ring.wav',
           },
         ],
       },
@@ -163,8 +299,24 @@ export const INSTRUMENTS = [
         displayName: 'Open Hi-Hat',
         options: [
           {
-            soundName: 'open-hihat-1',
+            soundName: 'openhat-1',
+            soundSrc: '/openhat-1.mp3',
+          },
+          {
+            soundName: 'openhat-808',
             soundSrc: '/openhat-808.wav',
+          },
+          {
+            soundName: 'openhat-acoustic-1',
+            soundSrc: '/openhat-acoustic-1.wav',
+          },
+          {
+            soundName: 'openhat-slick',
+            soundSrc: '/openhat-slick.wav',
+          },
+          {
+            soundName: 'openhat-tight',
+            soundSrc: '/openhat-tight.wav',
           },
         ],
       },
@@ -173,8 +325,12 @@ export const INSTRUMENTS = [
         displayName: 'Ride',
         options: [
           {
-            soundName: 'ride-1',
+            soundName: 'ride-acoustic-1',
             soundSrc: '/ride-acoustic-1.wav',
+          },
+          {
+            soundName: 'ride-acoustic-2',
+            soundSrc: '/ride-acoustic-2.wav',
           },
         ],
       },
@@ -183,8 +339,50 @@ export const INSTRUMENTS = [
         displayName: 'Clap',
         options: [
           {
-            soundName: 'clap-1',
+            soundName: 'clap-808',
             soundSrc: '/clap-808.wav',
+          },
+          {
+            soundName: 'clap-analog',
+            soundSrc: '/clap-analog.wav',
+          },
+          {
+            soundName: 'clap-crushed',
+            soundSrc: '/clap-crushed.wav',
+          },
+          {
+            soundName: 'clap-fat',
+            soundSrc: '/clap-fat.wav',
+          },
+          {
+            soundName: 'clap-slapper',
+            soundSrc: '/clap-slapper.wav',
+          },
+          {
+            soundName: 'clap-tape',
+            soundSrc: '/clap-tape.wav',
+          },
+        ],
+      },
+      {
+        name: 'crash',
+        displayName: 'Crash',
+        options: [
+          {
+            soundName: 'crash-808',
+            soundSrc: '/crash-808.wav',
+          },
+          {
+            soundName: 'crash-acoustic',
+            soundSrc: '/crash-acoustic.wav',
+          },
+          {
+            soundName: 'crash-noise',
+            soundSrc: '/crash-noise.wav',
+          },
+          {
+            soundName: 'crash-tape',
+            soundSrc: '/crash-tape.wav',
           },
         ],
       },
@@ -193,8 +391,40 @@ export const INSTRUMENTS = [
         displayName: 'Tom',
         options: [
           {
-            soundName: 'tom-1',
+            soundName: 'tom-808',
             soundSrc: '/tom-808.wav',
+          },
+          {
+            soundName: 'tom-acoustic-1',
+            soundSrc: '/tom-acoustic-1.wav',
+          },
+          {
+            soundName: 'tom-acoustic-2',
+            soundSrc: '/tom-acoustic-2.wav',
+          },
+          {
+            soundName: 'tom-analog',
+            soundSrc: '/tom-analog.wav',
+          },
+          {
+            soundName: 'tom-chiptune',
+            soundSrc: '/tom-chiptune.wav',
+          },
+          {
+            soundName: 'tom-fm',
+            soundSrc: '/tom-fm.wav',
+          },
+          {
+            soundName: 'tom-lofi',
+            soundSrc: '/tom-lofi.wav',
+          },
+          {
+            soundName: 'tom-rototom',
+            soundSrc: '/tom-rototom.wav',
+          },
+          {
+            soundName: 'tom-short',
+            soundSrc: '/tom-short.wav',
           },
         ],
       },

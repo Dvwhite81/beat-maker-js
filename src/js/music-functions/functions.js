@@ -27,7 +27,10 @@ const playTrackSound = (square) => {
   const name = square.classList[1].split('-')[0];
   const audio = document.querySelector(`#${name}-track-audio`);
   console.log('audio:', audio);
-  audio.play();
+  const { src } = audio;
+  console.log('src:', src);
+  const sound = new Audio(src);
+  sound.play();
 };
 
 export const playSounds = (currentIndex) => {
