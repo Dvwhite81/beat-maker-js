@@ -2,7 +2,7 @@ import buildElement, {
   INITIAL_SETTINGS,
   updateInstrumentSelect,
 } from '../helpers';
-import { openModal } from './modal';
+import { openSettingsModal } from './modal';
 
 // Toggle Functions
 export const toggleInstrumentSelectOpen = () => {
@@ -43,7 +43,7 @@ const buildSettingsBtn = () => {
 
   btn.append(tooltiptext, icon);
 
-  btn.addEventListener('click', openModal);
+  btn.addEventListener('click', openSettingsModal);
   return btn;
 };
 

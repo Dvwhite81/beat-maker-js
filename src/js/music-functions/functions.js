@@ -1,6 +1,6 @@
 import { INSTRUMENTS, handleMainGrid } from '../helpers';
 import { buildInstrumentSection } from '../build-functions/boards';
-import { buildAddInstrumentSelect } from '../build-functions/settings';
+import { openConfirmModal } from '../build-functions/modal';
 
 export const addInstrument = (instrumentType) => {
   const newInstrument = INSTRUMENTS.find((i) => i.type === instrumentType);
@@ -14,11 +14,5 @@ export const removeInstrument = (instrumentType) => {
     `#${instrumentType}-section`,
   );
 
-  // eslint-disable-next-line no-alert
-  //
-  // CHANGE TO MODAL ?
-  if (window.confirm('Remove this instrument?')) {
-    instrumentSection.remove();
-    buildAddInstrumentSelect();
-  }
+  openConfirmModal(instrumentSection);
 };

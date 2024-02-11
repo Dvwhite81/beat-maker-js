@@ -20,6 +20,11 @@
 }
 
 #container {
+  background: linear-gradient(
+    to bottom,
+    #9bc5c3,
+    #616161
+  );
   display: grid;
   grid-template-rows: 1fr 9fr;
   height: 100vh;

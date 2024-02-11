@@ -1,11 +1,12 @@
 import buildElement, { INITIAL_SETTINGS } from '../helpers';
 import { setAllSettings } from '../main';
+import { buildAddInstrumentSelect } from './settings';
 
-const openModal = () =>
-  (document.querySelector('#modal').style.display = 'flex');
+const openSettingsModal = () =>
+  (document.querySelector('#settings-modal').style.display = 'flex');
 
-const closeModal = () =>
-  (document.querySelector('#modal').style.display = 'none');
+const closeSettingsModal = () =>
+  (document.querySelector('#settings-modal').style.display = 'none');
 
 const getSettingsFromModal = () => {
   const settings = [];
@@ -38,21 +39,23 @@ const buildModalInput = (setting) => {
   return div;
 };
 
-const buildModal = () => {
+const buildSettingsModal = () => {
   const modal = buildElement('div', {
-    id: 'modal',
+    id: 'settings-modal',
+    className: 'modal',
   });
 
   const closeBtn = buildElement('button', {
-    id: 'modal-close',
+    id: 'settings-modal-close',
+    className: 'modal-close',
     type: 'button',
     textContent: 'x',
   });
 
-  closeBtn.addEventListener('click', closeModal);
+  closeBtn.addEventListener('click', closeSettingsModal);
 
   const modalContent = buildElement('div', {
-    id: 'modal-content',
+    className: 'modal-content',
   });
 
   for (const setting of INITIAL_SETTINGS) {
@@ -61,8 +64,8 @@ const buildModal = () => {
   }
 
   const submitBtn = buildElement('button', {
-    id: 'modal-submit',
-    className: 'btn',
+    id: 'settings-modal-submit',
+    className: 'btn modal-submit',
     type: 'button',
     textContent: 'Looks Good',
   });
@@ -70,14 +73,14 @@ const buildModal = () => {
   submitBtn.addEventListener('click', () => {
     const newSettings = getSettingsFromModal();
     setAllSettings(...newSettings);
-    closeModal();
+    closeSettingsModal();
   });
 
   modal.append(closeBtn, modalContent, submitBtn);
   return modal;
 };
 
-const updateModal = (...args) => {
+const updateSettingsModal = (...args) => {
   const modalInputs = document.querySelectorAll('.modal-input');
 
   for (let i = 0; i < modalInputs.length; i++) {
@@ -85,4 +88,53 @@ const updateModal = (...args) => {
   }
 };
 
-export { buildModal, closeModal, openModal, updateModal };
+const openConfirmModal = (instrumentSection) => {
+  const modal = buildElement('div', {
+    id: 'confirm-modal',
+    className: 'modal',
+  });
+
+  const closeBtn = buildElement('button', {
+    id: 'confirm-modal-close',
+    className: 'modal-close',
+    type: 'button',
+    textContent: 'x',
+  });
+
+  closeBtn.addEventListener('click', () => modal.remove());
+
+  const modalContent = buildElement('div', {
+    className: 'modal-content',
+  });
+
+  const confirmContent = buildElement('p', {
+    textContent: 'Remove this instrument?',
+  });
+
+  modalContent.append(confirmContent);
+
+  const submitBtn = buildElement('button', {
+    id: 'confirm-modal-submit',
+    className: 'btn modal-submit',
+    type: 'button',
+    textContent: 'Remove',
+  });
+
+  submitBtn.addEventListener('click', () => {
+    // remove instrument
+    instrumentSection.remove();
+    buildAddInstrumentSelect();
+    modal.remove();
+  });
+
+  modal.append(closeBtn, modalContent, submitBtn);
+  document.querySelector('#container').append(modal);
+};
+
+export {
+  buildSettingsModal,
+  closeSettingsModal,
+  openConfirmModal,
+  openSettingsModal,
+  updateSettingsModal,
+};

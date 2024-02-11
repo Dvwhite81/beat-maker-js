@@ -1,4 +1,4 @@
-#modal {
+.modal {
   align-items: center;
   background-color: gainsboro;
   border-radius: 10px;
@@ -14,7 +14,7 @@
   z-index: 1;
 }
 
-#modal-close {
+.modal-close {
   align-items: center;
   cursor: pointer;
   display: flex;
@@ -26,13 +26,13 @@
   width: 2rem;
 }
 
-#modal-close:hover {
+.modal-close:hover {
   background: black;
   border-radius: 50%;
   color: gainsboro;
 }
 
-#modal-content {
+.modal-content {
   align-items: center;
   display: flex;
   flex-direction: column;
@@ -41,7 +41,7 @@
   width: 80%;
 }
 
-#modal-content div {
+.modal-content div {
   display: flex;
   justify-content: space-between;
   width: 80%;
@@ -54,7 +54,7 @@
   width: 50%;
 }
 
-#modal-submit {
+.modal-submit {
   background-color: black;
   border: 2px solid;
   border-radius: 5px;
@@ -63,7 +63,11 @@
   padding: 0.5rem;
 }
 
-#modal-submit:hover {
+.modal-submit:hover {
   background-color: gainsboro;
   color: black;
+}
+
+#confirm-modal {
+  display: flex;
 }
