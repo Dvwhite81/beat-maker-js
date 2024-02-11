@@ -1,9 +1,20 @@
+/* eslint-disable eqeqeq */
 import buildElement, { INITIAL_SETTINGS } from '../helpers';
 import { setAllSettings } from '../main';
 import { buildAddInstrumentSelect } from './settings';
 
-const openSettingsModal = () =>
-  (document.querySelector('#settings-modal').style.display = 'flex');
+const openSettingsModal = () => {
+  const modal = document.querySelector('#settings-modal');
+  modal.style.display = 'flex';
+
+  document.querySelector('#main-container').addEventListener('click', (e) => {
+    const clickInside = modal.contains(e.target);
+
+    if (!clickInside) {
+      modal.style.display = 'none';
+    }
+  });
+};
 
 const closeSettingsModal = () =>
   (document.querySelector('#settings-modal').style.display = 'none');
@@ -89,6 +100,7 @@ const updateSettingsModal = (...args) => {
 };
 
 const openConfirmModal = (instrumentSection) => {
+  console.log('openConfirmModal');
   const modal = buildElement('div', {
     id: 'confirm-modal',
     className: 'modal',
@@ -129,6 +141,15 @@ const openConfirmModal = (instrumentSection) => {
 
   modal.append(closeBtn, modalContent, submitBtn);
   document.querySelector('#container').append(modal);
+
+  document.querySelector('#main-container').addEventListener('click', (e) => {
+    const clickInside =
+      modal.contains(e.target) || e.target.classList.contains('remove-icon');
+
+    if (!clickInside) {
+      modal.remove();
+    }
+  });
 };
 
 export {
